@@ -52,7 +52,7 @@ def plugin_skin_exposure(image, layer, exposure):
     image.add_layer(new_layer, 0)
 
     # 露出補正
-    pdb.gimp_dodgeburn(new_layer, exposure, 1, 0)
+    pdb.gimp_dodgeburn(new_layer, exposure, 0, 2, 4)
 
     # 完全透明黒でマスクを作成する
     mask = pdb.gimp_layer_create_mask(new_layer, ADD_BLACK_MASK)
@@ -78,7 +78,7 @@ register(
         [
             (PF_IMAGE, "image", "Input image", None),
             (PF_DRAWABLE, "drawable", "Drawable", None),
-            (PF_SLIDER, "opacity",  "Op_acity", 20, (0, 100, 1)),
+            (PF_SLIDER, "opacity",  "Exposure Level", 20, (0, 100, 1)),
          ],                      #引数
         [],                      #戻り値
         plugin_skin_exposure,             # main 関数名
