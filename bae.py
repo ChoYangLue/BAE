@@ -21,6 +21,8 @@ def plugin_skin_texture(image, layer, angle):
 
     # ブラシをアクティブに
     pdb.gimp_context_set_brush("2. Hardness 075")
+    pdb.gimp_brushes_set_opacity(45)
+    pdb.gimp_context_set_brush_size(60)
 
     return 0
 
@@ -51,8 +53,10 @@ def plugin_skin_exposure(image, layer, exposure):
     new_layer = pdb.gimp_layer_copy(layer, 1)
     image.add_layer(new_layer, 0)
 
-    # 露出補正
-    pdb.gimp_dodgeburn(new_layer, exposure, 0, 2, 4)
+    # 露出補正はなんかうまくいかない
+    #pdb.gimp_dodgeburn(new_layer, exposure, 0, 1, 4,(0,0, 0,1000, 1000,0, 1000,1000))
+
+    pdb.gimp_brightness_contrast(new_layer, exposure, exposure-10)
 
     # 完全透明黒でマスクを作成する
     mask = pdb.gimp_layer_create_mask(new_layer, ADD_BLACK_MASK)
@@ -62,6 +66,8 @@ def plugin_skin_exposure(image, layer, exposure):
 
     # ブラシをアクティブに
     pdb.gimp_context_set_brush("2. Hardness 075")
+    pdb.gimp_brushes_set_opacity(19)
+    pdb.gimp_context_set_brush_size(400)
 
     return 0
 
